@@ -1,6 +1,13 @@
 
 //const fs = require('fs')
 
+function isArray (item) {
+    return Object.prototype.toString.call(item) === '[object Array]';
+  }
+function isObject (item) {
+return typeof item === 'object' && item !== null && !isArray(item);
+}
+
 /*function b64_to_utf8( str ) {
     d = new Buffer.from(str, 'base64');
     return d.toString('utf8');
@@ -1784,3 +1791,33 @@ if(""){console.log("a")}
 cost("cursor",0.99**5*0.93,1000)+cost("cursor",0.99**5*0.93,1001)+cost("cursor",0.99**5*0.93,1002)-cost("cursor",0.99**5*0.93,1002)-cost("cursor",0.99**5*0.93,1001)-cost("cursor",0.99**5*0.93,1000)
 */
 
+let showdata = function(Game){
+    let data = "<dl>"
+    for (let i in Game) {
+        if (typeof Game[i] === "function") {continue}
+        if (i.slice(-4) === "ById") {continue}
+        data += "<dt>" + i + "</dt><dd>"
+        if (isObject(Game[i])) {
+            data += "<dl>"
+            for (let j in Game[i]) {
+                data += "<dt>" + j + "</d>"
+                data += "<dd>" + showdata(Game[i][j]) + "</dd>"
+            }
+            data += "</dl></dd>"
+        }
+        else if (isArray(Game[i])) {
+            for (let j in Game[i]) {
+                data += "<dd>" + showdata(Game[i][j]) + "</dd>"
+            }
+            data += "</dd>"
+        }
+        else {
+            data += Game[i] + "</dd>"
+        }
+    }
+    return data
+}
+
+let show = function (Game) {
+    document.getElementById('text').innerHTML = showdata(Game)
+}
