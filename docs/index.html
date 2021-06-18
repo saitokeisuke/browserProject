@@ -5,11 +5,11 @@
 <body>
   <div>
     <input id="savecode" value=""></input>
-    <button onclick="Game.LoadSave(document.getElementById('savecode').value)">loadsave</button>
-    <button onclick="document.getElementById('text').innerText=JSON.stringify(Game,null,2).replace(/ /g,'&ensp;')">show</button>
-    <button onclick="let a = '';document.getElementById('text').innerText=a">hide</button>
-    <button onclick="Game.spells=spells;document.getElementById('text').innerHTML=spellchain(Game.ObjectsById[7].M.spellsCastTotal,6,true,Game)">spellchain</button>
-    <button onclick="howbuy(buildingsOwned(),true,[1,1,1],7 * 15 * 666 * 80**5,777 * 1111);document.getElementById('text').innerText=JSON.stringify(Game.maxBuy,null,'  ')">buy</button>
+    <button onclick="Game.LoadSave(document.getElementById('savecode').value)" class="btn btn--orange">loadsave</button>
+    <button onclick="document.getElementById('text').innerText=JSON.stringify(Game,null,2).replace(/ /g,'&ensp;')" class="btn btn--orange">show</button>
+    <button onclick="let a = '';document.getElementById('text').innerText=a" class="btn btn--orange">hide</button>
+    <button onclick="Game.spells=spells;document.getElementById('text').innerHTML=spellchain(Game.ObjectsById[7].M.spellsCastTotal,6,true,Game)" class="btn btn--orange">spellchain</button>
+    <button onclick="howbuy(buildingsOwned(),true,[1,1,1],7 * 15 * 666 * 80**5,777 * 1111);document.getElementById('text').innerText=JSON.stringify(Game.maxBuy,null,'  ')" class="btn btn--orange">buy</button>
   </div>
   <div>
     <input type="radio" name="folder" value="lump" checked=true>lump</input>
