@@ -17,7 +17,7 @@ let b64_to_utf8 = function(str) {
     return decodeURIComponent(escape(atob(str)));
 }
 let lumptype = ['Normal','Bifurcated','Golden','Meaty','Caramelized']
-Game = {}
+/*Game = {}
 Game.CountsAsAchievementOwned = ()=>{}
 Game.CountsAsUpgradeOwned = ()=>{}
 Game.bounds={right:5*document.documentElement.clientWidth,left:0,top:32,bottom:5*document.documentElement.clientHeight-32}
@@ -290,7 +290,7 @@ Game.LoadSave=function(data)
                                 x=top+200;
                                 M.magicM=x;
                             }
-                            */
+                            
                             M.magic=Math.min(M.magicM,M.magic);
                         }
                         let load=function(str)
@@ -600,7 +600,7 @@ Game.LoadSave=function(data)
                     var mestr=buffsToLoad[i];
                     var type=Game.buffTypes[parseInt(mestr[0])];
                     Game.gainBuff(type.name,parseFloat(mestr[1])/Game.fps,parseFloat(mestr[3]||0),parseFloat(mestr[4]||0),parseFloat(mestr[5]||0)).time=parseFloat(mestr[2]);
-                }*/
+                }
 
 
                 Game.loadLumps(timeOffline);
@@ -661,6 +661,7 @@ Game.LoadSave=function(data)
     else return false;
     return true;
 }
+*/
 
 /*Game.LoadSave(
     
