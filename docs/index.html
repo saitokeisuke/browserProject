@@ -5,7 +5,7 @@
 </head>
 <body>
   <div>
-    <input id="savecode" value="enter saveCode"　onsubmit="Game.LoadSave(document.getElementById('savecode').value)">Enter SaveCode</input>
+    <input id="savecode" value="Enter SaveCode"　onsubmit="Game.LoadSave(document.getElementById('savecode').value)"></input>
     <button type="submit" onclick="Game.LoadSave(document.getElementById('savecode').value)" class="btn btn--orange">loadsave</button>
     <button onclick="document.getElementById('text').innerText=JSON.stringify(Game,null,2).replace(/ /g,'&ensp;')" class="btn btn--orange">show</button>
     <button onclick="let a = '';document.getElementById('text').innerText=a" class="btn btn--orange">hide</button>
