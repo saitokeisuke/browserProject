@@ -1,124 +1,58 @@
-
-<!DOCTYPE html>
-<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Expires" content="864000">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
-<title>Domino Online</title>
-<link rel="stylesheet" href="domino_style.css" type="text/css">
-<script type="text/javascript" src="../common/analytics.js"></script>
-
+  <script type="text/javascript" src="cookieclicker.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/2.3.11/seedrandom.min.js"></script>
 </head>
 <body>
-	
-	
-	<div id="header">
-		
-		<div id="header_contents">
-			<a href="https://web.shimage.net/" target="_blank">web.shimage.net</a>
-			<h1>
-				Domino Online
-				<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://shimage.net/domino/index.html" data-lang="en"></a>
-				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-			</h1>
-		</div>
-		
-	</div>
-
-	<div id="stage">
-		
-		<img id="volset" onclick="setAllVolume()" src="./data/volset100.png">
-		
-		<div id="wrapper">
-			<canvas id="a_canvas" height="220"></canvas>
-		</div>
-		
-		<span id="message"></span>
-		
-		<div id="txtDominoCount">-</div>
-		
-		<div id="txtYourId">-</div>
-		
-		<div id="topplebutton">
-			<a href="javascript:showWindow()"><img name="imgTopple" src="./data/yubi1.png" onmouseover="imgOver()" onmouseout="imgOut()" style="border:0px" /></a>
-		</div>
-		
-		<div id="toppleWindow">
-			<b>注意</b><br>
-			他の誰かもドミノを並べているかもしれません。倒す場合は下の画像の文字をタイプし、OKを押して下さい。<br>
-			<br>
-			<b>Caution</b><br>
-			Someone may be putting the domino. If you want to push down, please type the character of a image below and push OK.<br>
-			<br>
-			<img name="imgCaptcha" src="captcha.php" style="border:1px solid #000000" /><br>
-			
-			<form name="form1" onsubmit="return false;">
-				<input type="text" name="key" value="" style="width:235px">
-				<input type="button" onClick="toppleDomino()" value="OK">
-				<input type="button" onClick="hideWindow()" value="CANCEL">
-			</form>
-		</div>
-		
-		<div id="contents">
-			<div id="history">
-				<h2>History</h2>
-				<div id="listHistory">
-					<ul>
-						<li>loading...
-						<li>loading...
-						<li>loading...
-						<li>loading...
-						<li>loading...
-						<li>loading...
-						<li>loading...
-						<li>loading...
-						<li>loading...
-						<li>loading...
-					</ul>
-				</div>
-			</div>
-			
-			<div id="highscore">
-				<h2>Highscore(Monthly)</h2>
-				<div id="listHighscore">
-					<ul>
-						<li>loading...
-						<li>loading...
-						<li>loading...
-						<li>loading...
-						<li>loading...
-						<li>loading...
-						<li>loading...
-						<li>loading...
-						<li>loading...
-						<li>loading...
-					</ul>
-				</div>
-			</div>
-		</div>
-		
-		<div id="footer">
-			<a href="../index.html">&copy;shimage.net</a>
-		</div>
-	</div>
-	
-	<div id="ad">
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-		<!-- responsive2 -->
-		<ins class="adsbygoogle"
-		     style="display:block"
-		     data-ad-client="ca-pub-9064608402527289"
-		     data-ad-slot="7009434518"
-		     data-ad-format="auto"
-		     data-full-width-responsive="true"></ins>
-		<script>
-		(adsbygoogle = window.adsbygoogle || []).push({});
-		</script>
-	</div>
-	
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="domino_script.js"></script>
-	
+  <div>
+    <input id="savecode" value=""></input>
+    <button onclick="Game.LoadSave(document.getElementById('savecode').value)">loadsave</button>
+    <button onclick="document.getElementById('text').innerText=JSON.stringify(Game,null,2).replace(/ /g,'&ensp;')">show</button>
+    <button onclick="let a = '';document.getElementById('text').innerText=a">hide</button>
+    <button onclick="Game.spells=spells;document.getElementById('text').innerHTML=spellchain(Game.ObjectsById[7].M.spellsCastTotal,6,true,Game)">spellchain</button>
+    <button onclick="howbuy(buildingsOwned(),true,[1,1,1],7 * 15 * 666 * 80**5,777 * 1111);document.getElementById('text').innerText=JSON.stringify(Game.maxBuy,null,'  ')">buy</button>
+  </div>
+  <div>
+    <input type="radio" name="folder" value="lump" checked=true>lump</input>
+    <input type="radio" name="folder" value="ascend">ascend</input>
+    <input id="file" type="file" name="upfile[]" webkitdirectory></input>
+  </div>
+  <div style="max-height:500px;overflow:auto;" id="text"></div>
+  <script>
+    document.getElementById('file').addEventListener('change', ev =>{
+      let display = document.getElementById('text');
+      let type = document.getElementsByName("folder");
+      for (let i in type) {
+        if (type[i].checked) {
+          type = type[i].value;
+          break
+        }
+      }
+      display.innerText='';
+      let files = ev.target.files;
+      for (let i in files) {
+        let path = files[i].webkitRelativePath;
+        if (path&&path.indexOf('DIALWORKSBakery')!=-1){
+          console.log(path);
+          let reader = new FileReader();
+          reader.onload=function(){
+            let text = this.result;
+            Game.LoadSave(text);
+            if (type == "lump" && Game.lumpCurrentType == 2 || Game.lumpCurrentType == 4) {
+              display.innerText+=`${i} ${Game.lumps} ${lumptype[Game.lumpCurrentType]} ${path}\n${text}\n\n`;
+            }
+            else if (type == "ascend") {
+              let $scope = Game;
+              $scope.spells = spells;
+              let res = spellchain(Game.ObjectsById[7].M.spellsCastTotal,6,false,$scope);
+              if(res.length > 0) {
+                  display.innerText+=`${i} ${path}\n${JSON.stringify(res)}\n${text}\n\n`
+              }
+            }
+          }
+          reader.readAsText(files[i])
+        }
+      }
+    });
+  </script>
+  
 </body>
-</html>
