@@ -5,9 +5,9 @@
 </head>
 <body>
   <div>
-    <input id="savecode" value="Enter SaveCode"　onsubmit="Game.LoadSave(document.getElementById('savecode').value)"></input>
-    <input type="submit" onclick="Game.LoadSave(document.getElementById('savecode').value)" class="btn btn--orange" value="loadsave"></button>
-    <button onclick="document.getElementById('text').innerText=JSON.stringify(Game,null,2).replace(/ /g,'&ensp;')" class="btn btn--orange">show data</button>
+    <input id="savecode" value="Enter SaveData" onkeypress="if(13 === event.keyCode){Game.LoadSave(document.getElementById('savecode').value);show(Game)}"></input>
+    <input type="submit" onclick="Game.LoadSave(document.getElementById('savecode').value);show(Game)" class="btn btn--orange" value="loadsave"></button>
+    <button onclick="show(Game)" class="btn btn--orange">show data</button>
     <button onclick="let a = '';document.getElementById('text').innerText=a" class="btn btn--orange">hide</button>
     <button onclick="Game.spells=spells;document.getElementById('text').innerHTML=spellchain(Game.ObjectsById[7].M.spellsCastTotal,6,true,Game)" class="btn btn--orange">spellchain</button>
     <button onclick="howbuy(buildingsOwned(),true,[1,1,1],7 * 15 * 666 * 80**5,777 * 1111);document.getElementById('text').innerText=JSON.stringify(Game.maxBuy,null,'  ')" class="btn btn--orange">buy</button>
