@@ -36,13 +36,15 @@ button.btn {
 }
 
 .btn--orange,
-a.btn--orange {
+a.btn--orange,
+button.btn--orange {
   color: #fff;
   background-color: #eb6100;
 }
 
 .btn--orange:hover,
-a.btn--orange:hover {
+a.btn--orange:hover,
+button.btn--orange:hover {
   color: #fff;
   background: #f56500;
 }
